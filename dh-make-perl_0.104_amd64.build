@@ -1,0 +1,295 @@
+ dpkg-buildpackage -D -us -uc -ui -b -Jauto -Pnobiarch,nocheck,nodoc
+dpkg-buildpackage: info: source package dh-make-perl
+dpkg-buildpackage: info: source version 0.104
+dpkg-buildpackage: info: source distribution UNRELEASED
+dpkg-buildpackage: info: source changed by Damyan Ivanov <dmn@debian.org>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ debian/rules clean
+dh clean
+   dh_auto_clean
+	make -j8 distclean
+make[1]: Entering directory '/dev/shm/dh-make-perl/dh-make-perl'
+[ ! -e Build ] || ./Build distclean
+make[1]: Leaving directory '/dev/shm/dh-make-perl/dh-make-perl'
+   debian/rules override_dh_clean
+make[1]: Entering directory '/dev/shm/dh-make-perl/dh-make-perl'
+dh_clean -Xt/dists/Strange-2.1/DEADJOE
+	rm -f debian/debhelper-build-stamp
+	rm -rf debian/.debhelper/
+	rm -f -- debian/dh-make-perl.substvars debian/libdebian-source-perl.substvars debian/files
+	rm -fr -- debian/dh-make-perl/ debian/tmp/ debian/libdebian-source-perl/
+	find . ! \( -regex .\*t/dists/Strange-2\\.1/DEADJOE.\* \) -a \( \( \
+		\( -path .\*/.git -o -path .\*/.svn -o -path .\*/.bzr -o -path .\*/.hg -o -path .\*/CVS -o -path .\*/.pc -o -path .\*/_darcs \) -prune -o -type f -a \
+	        \( -name '#*#' -o -name '.*~' -o -name '*~' -o -name DEADJOE \
+		 -o -name '*.orig' -o -name '*.rej' -o -name '*.bak' \
+		 -o -name '.*.orig' -o -name .*.rej -o -name '.SUMS' \
+		 -o -name TAGS -o \( -path '*/.deps/*' -a -name '*.P' \) \
+		\) -exec rm -f {} + \) -o \
+		\( -type d -a -name autom4te.cache -prune -exec rm -rf {} + \) \)
+rm -rf /dev/shm/dh-make-perl/dh-make-perl/debian/build
+# clean after test packages
+for i in Strange-0.1 Strange-2.1; do\
+	if test -d "t/dists/$i/debian"; then \
+	    ( \
+		cd t/dists/$i && \
+		debian/rules clean && \
+		cd .. && \
+		rm -rf $i/debian; \
+	    ) \
+	fi \
+done
+make[1]: Leaving directory '/dev/shm/dh-make-perl/dh-make-perl'
+ debian/rules binary
+dh binary
+   dh_update_autotools_config
+   dh_autoreconf
+   dh_auto_configure
+	perl Build.PL --installdirs vendor --config "optimize=-g -O2 -fdebug-prefix-map=/dev/shm/dh-make-perl/dh-make-perl=. -Wformat -march=native -pipe -Wformat-security -Wdate-time -D_FORTIFY_SOURCE=2"
+Created MYMETA.yml and MYMETA.json
+Creating new 'Build' script for 'DhMakePerl' version '0.104'
+   dh_auto_build
+	perl Build
+Building DhMakePerl
+   debian/rules override_dh_auto_test
+make[1]: Entering directory '/dev/shm/dh-make-perl/dh-make-perl'
+mkdir -p /dev/shm/dh-make-perl/dh-make-perl/debian/build
+HOME=/dev/shm/dh-make-perl/dh-make-perl/debian/build NO_NETWORK=1 dh_auto_test
+make[1]: Leaving directory '/dev/shm/dh-make-perl/dh-make-perl'
+   create-stamp debian/debhelper-build-stamp
+   dh_testroot
+   dh_prep
+	rm -f -- debian/dh-make-perl.substvars debian/libdebian-source-perl.substvars
+	rm -fr -- debian/.debhelper/generated/dh-make-perl/ debian/dh-make-perl/ debian/tmp/ debian/.debhelper/generated/libdebian-source-perl/ debian/libdebian-source-perl/
+   dh_auto_install
+	install -d /dev/shm/dh-make-perl/dh-make-perl/debian/tmp
+	perl Build install --destdir /dev/shm/dh-make-perl/dh-make-perl/debian/tmp --create_packlist 0
+Building DhMakePerl
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man1/dh-make-perl.1p
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Utils.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/PodParser.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Config.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/refresh_cache.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/refresh.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/make.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/locate.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/help.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/dump_config.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/DhMakePerl/Command/Packaging.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Rules.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/DpkgLists.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Dependency.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Dependencies.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/AptContents.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/WNPP/Query.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/WNPP/Bug.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control/Stanza.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control/FromCPAN.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control/Stanza/Source.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control/Stanza/CommaSeparated.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/perl5/Debian/Control/Stanza/Binary.pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Utils.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::PodParser.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Config.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::refresh.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::make.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::locate.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::help.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/DhMakePerl.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::WNPP::Query.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::WNPP::Bug.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Rules.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::DpkgLists.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Dependency.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Dependencies.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control::Stanza::Source.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control::Stanza.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control::FromCPAN.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::Control.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/man/man3/Debian::AptContents.3pm
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/bin/dh-make-perl
+Installing /dev/shm/dh-make-perl/dh-make-perl/debian/tmp/usr/share/dh-make-perl/rules.dh.tiny
+   dh_install
+	install -d debian/dh-make-perl//usr/bin
+	cp --reflink=auto -a debian/tmp/usr/bin/dh-make-perl debian/dh-make-perl//usr/bin/
+	install -d debian/dh-make-perl//usr/share/dh-make-perl
+	cp --reflink=auto -a debian/tmp/usr/share/dh-make-perl/rules.dh.tiny debian/dh-make-perl//usr/share/dh-make-perl/
+	install -d debian/dh-make-perl//usr/share/man/man1
+	cp --reflink=auto -a debian/tmp/usr/share/man/man1/dh-make-perl.1p debian/dh-make-perl//usr/share/man/man1/
+	install -d debian/dh-make-perl//usr/share/man/man3
+	cp --reflink=auto -a debian/tmp/usr/share/man/man3/Debian::AptContents.3pm debian/tmp/usr/share/man/man3/Debian::Control::FromCPAN.3pm debian/tmp/usr/share/man/man3/DhMakePerl.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::help.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::locate.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::make.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::refresh.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Config.3pm debian/tmp/usr/share/man/man3/DhMakePerl::PodParser.3pm debian/tmp/usr/share/man/man3/DhMakePerl::Utils.3pm debian/dh-make-perl//usr/share/man/man3/
+	install -d debian/dh-make-perl//usr/share/perl5
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/DhMakePerl debian/tmp/usr/share/perl5/DhMakePerl.pm debian/dh-make-perl//usr/share/perl5/
+	install -d debian/dh-make-perl//usr/share/perl5/Debian
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/Debian/AptContents.pm debian/dh-make-perl//usr/share/perl5/Debian/
+	install -d debian/dh-make-perl//usr/share/perl5/Debian/Control
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/Debian/Control/FromCPAN.pm debian/dh-make-perl//usr/share/perl5/Debian/Control/
+	install -d debian/.debhelper/generated/dh-make-perl
+	install -d debian/libdebian-source-perl//usr/share/man/man3
+	cp --reflink=auto -a debian/tmp/usr/share/man/man3/Debian::Control.3pm debian/tmp/usr/share/man/man3/Debian::Control::Stanza.3pm debian/tmp/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm debian/tmp/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm debian/tmp/usr/share/man/man3/Debian::Control::Stanza::Source.3pm debian/tmp/usr/share/man/man3/Debian::Dependencies.3pm debian/tmp/usr/share/man/man3/Debian::Dependency.3pm debian/tmp/usr/share/man/man3/Debian::DpkgLists.3pm debian/tmp/usr/share/man/man3/Debian::Rules.3pm debian/tmp/usr/share/man/man3/Debian::WNPP::Bug.3pm debian/tmp/usr/share/man/man3/Debian::WNPP::Query.3pm debian/libdebian-source-perl//usr/share/man/man3/
+	install -d debian/libdebian-source-perl//usr/share/perl5/Debian
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/Debian/Control.pm debian/tmp/usr/share/perl5/Debian/Dependencies.pm debian/tmp/usr/share/perl5/Debian/Dependency.pm debian/tmp/usr/share/perl5/Debian/DpkgLists.pm debian/tmp/usr/share/perl5/Debian/Rules.pm debian/libdebian-source-perl//usr/share/perl5/Debian/
+	install -d debian/libdebian-source-perl//usr/share/perl5/Debian/Control
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/Debian/Control/Stanza debian/tmp/usr/share/perl5/Debian/Control/Stanza.pm debian/libdebian-source-perl//usr/share/perl5/Debian/Control/
+	install -d debian/libdebian-source-perl//usr/share/perl5/Debian/WNPP
+	cp --reflink=auto -a debian/tmp/usr/share/perl5/Debian/WNPP/Bug.pm debian/tmp/usr/share/perl5/Debian/WNPP/Query.pm debian/libdebian-source-perl//usr/share/perl5/Debian/WNPP/
+	install -d debian/.debhelper/generated/libdebian-source-perl
+   dh_installdocs
+	install -d debian/dh-make-perl/usr/share/doc/dh-make-perl
+	install -p -m0644 debian/copyright debian/dh-make-perl/usr/share/doc/dh-make-perl/copyright
+	install -d debian/libdebian-source-perl/usr/share/doc/libdebian-source-perl
+	install -p -m0644 debian/copyright debian/libdebian-source-perl/usr/share/doc/libdebian-source-perl/copyright
+   dh_installchangelogs
+	install -p -m0644 debian/changelog debian/dh-make-perl/usr/share/doc/dh-make-perl/changelog
+	install -p -m0644 debian/dh-make-perl.NEWS debian/dh-make-perl/usr/share/doc/dh-make-perl/NEWS.Debian
+	install -p -m0644 debian/changelog debian/libdebian-source-perl/usr/share/doc/libdebian-source-perl/changelog
+   dh_installman
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Utils.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Utils.3pm.dh-new
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh.3pm.dh-new
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm.dh-new
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/Debian::AptContents.3pm > debian/dh-make-perl/usr/share/man/man3/Debian::AptContents.3pm.dh-new
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Rules.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Rules.3pm.dh-new
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Source.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Source.3pm.dh-new
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Control.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Control.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Utils.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Utils.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::PodParser.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::PodParser.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::make.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::make.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/Debian::AptContents.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/Debian::AptContents.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man1/dh-make-perl.1p > debian/dh-make-perl/usr/share/man/man1/dh-make-perl.1p.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Rules.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Rules.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::DpkgLists.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::DpkgLists.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Source.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Source.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Control.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Control.3pm
+	chmod 0644 -- debian/libdebian-source-perl/usr/share/man/man3/Debian::Control.3pm
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::make.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::make.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::locate.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::locate.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::PodParser.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::PodParser.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Config.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Config.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::DpkgLists.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::DpkgLists.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependency.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependency.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man1/dh-make-perl.1p.dh-new debian/dh-make-perl/usr/share/man/man1/dh-make-perl.1p
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Query.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Query.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::locate.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::locate.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::help.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::help.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/Debian::Control::FromCPAN.3pm > debian/dh-make-perl/usr/share/man/man3/Debian::Control::FromCPAN.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Query.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Query.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Bug.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Bug.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependency.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependency.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependencies.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependencies.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Config.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Config.3pm
+	man -l --recode UTF-8 ./debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm > debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm.dh-new
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm
+	man -l --recode UTF-8 ./debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza.3pm > debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza.3pm.dh-new
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::help.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::help.3pm
+	chmod 0644 -- debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::make.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::locate.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::help.3pm
+	mv debian/dh-make-perl/usr/share/man/man3/Debian::Control::FromCPAN.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/Debian::Control::FromCPAN.3pm
+	chmod 0644 -- debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::dump_config.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::Packaging.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl.3pm debian/dh-make-perl/usr/share/man/man3/Debian::Control::FromCPAN.3pm
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Bug.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Bug.3pm
+	chmod 0644 -- debian/dh-make-perl/usr/share/man/man3/Debian::AptContents.3pm debian/dh-make-perl/usr/share/man/man1/dh-make-perl.1p debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Query.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::WNPP::Bug.3pm
+	mv debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm.dh-new debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm
+	chmod 0644 -- debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Utils.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::PodParser.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Config.3pm debian/dh-make-perl/usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependencies.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependencies.3pm
+	chmod 0644 -- debian/libdebian-source-perl/usr/share/man/man3/Debian::Rules.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::DpkgLists.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependency.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::Dependencies.3pm
+	mv debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza.3pm.dh-new debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza.3pm
+	chmod 0644 -- debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Source.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza::Binary.3pm debian/libdebian-source-perl/usr/share/man/man3/Debian::Control::Stanza.3pm
+   dh_lintian
+	install -d debian/dh-make-perl/usr/share/lintian/overrides
+	install -p -m0644 debian/dh-make-perl.lintian-overrides debian/dh-make-perl/usr/share/lintian/overrides/dh-make-perl
+	install -d debian/libdebian-source-perl/usr/share/lintian/overrides
+	install -p -m0644 debian/libdebian-source-perl.lintian-overrides debian/libdebian-source-perl/usr/share/lintian/overrides/libdebian-source-perl
+   dh_perl
+	(grep -a -s -v perl:Depends debian/dh-make-perl.substvars; echo perl:Depends=perl) > debian/dh-make-perl.substvars.new
+	mv debian/dh-make-perl.substvars.new debian/dh-make-perl.substvars
+	rmdir --ignore-fail-on-non-empty --parents debian/dh-make-perl/usr/share/perl5
+	(grep -a -s -v perl:Depends debian/libdebian-source-perl.substvars; echo perl:Depends=perl) > debian/libdebian-source-perl.substvars.new
+	mv debian/libdebian-source-perl.substvars.new debian/libdebian-source-perl.substvars
+	rmdir --ignore-fail-on-non-empty --parents debian/libdebian-source-perl/usr/share/perl5
+   dh_link
+	rm -f debian/dh-make-perl/usr/share/man/man1/cpan2dsc.1p
+	ln -s dh-make-perl.1p debian/dh-make-perl/usr/share/man/man1/cpan2dsc.1p
+	rm -f debian/dh-make-perl/usr/share/man/man1/cpan2deb.1p
+	ln -s dh-make-perl.1p debian/dh-make-perl/usr/share/man/man1/cpan2deb.1p
+	rm -f debian/dh-make-perl/usr/bin/cpan2dsc
+	ln -s dh-make-perl debian/dh-make-perl/usr/bin/cpan2dsc
+	rm -f debian/dh-make-perl/usr/bin/cpan2deb
+	ln -s dh-make-perl debian/dh-make-perl/usr/bin/cpan2deb
+   dh_strip_nondeterminism
+   dh_compress
+	cd debian/dh-make-perl
+	cd debian/libdebian-source-perl
+	chmod a-x usr/share/doc/dh-make-perl/NEWS.Debian usr/share/doc/dh-make-perl/changelog usr/share/man/man1/dh-make-perl.1p usr/share/man/man3/Debian::AptContents.3pm usr/share/man/man3/Debian::Control::FromCPAN.3pm usr/share/man/man3/DhMakePerl.3pm usr/share/man/man3/DhMakePerl::Command::Packaging.3pm usr/share/man/man3/DhMakePerl::Command::dump_config.3pm usr/share/man/man3/DhMakePerl::Command::help.3pm usr/share/man/man3/DhMakePerl::Command::locate.3pm usr/share/man/man3/DhMakePerl::Command::make.3pm usr/share/man/man3/DhMakePerl::Command::refresh.3pm usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm usr/share/man/man3/DhMakePerl::Config.3pm usr/share/man/man3/DhMakePerl::PodParser.3pm usr/share/man/man3/DhMakePerl::Utils.3pm
+	chmod a-x usr/share/doc/libdebian-source-perl/changelog usr/share/man/man3/Debian::Control.3pm usr/share/man/man3/Debian::Control::Stanza.3pm usr/share/man/man3/Debian::Control::Stanza::Binary.3pm usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm usr/share/man/man3/Debian::Control::Stanza::Source.3pm usr/share/man/man3/Debian::Dependencies.3pm usr/share/man/man3/Debian::Dependency.3pm usr/share/man/man3/Debian::DpkgLists.3pm usr/share/man/man3/Debian::Rules.3pm usr/share/man/man3/Debian::WNPP::Bug.3pm usr/share/man/man3/Debian::WNPP::Query.3pm
+	gzip -9nf usr/share/doc/dh-make-perl/NEWS.Debian usr/share/doc/dh-make-perl/changelog usr/share/man/man1/dh-make-perl.1p usr/share/man/man3/Debian::AptContents.3pm usr/share/man/man3/Debian::Control::FromCPAN.3pm usr/share/man/man3/DhMakePerl.3pm usr/share/man/man3/DhMakePerl::Command::Packaging.3pm usr/share/man/man3/DhMakePerl::Command::dump_config.3pm usr/share/man/man3/DhMakePerl::Command::help.3pm usr/share/man/man3/DhMakePerl::Command::locate.3pm usr/share/man/man3/DhMakePerl::Command::make.3pm usr/share/man/man3/DhMakePerl::Command::refresh.3pm usr/share/man/man3/DhMakePerl::Command::refresh_cache.3pm usr/share/man/man3/DhMakePerl::Config.3pm usr/share/man/man3/DhMakePerl::PodParser.3pm usr/share/man/man3/DhMakePerl::Utils.3pm
+	gzip -9nf usr/share/doc/libdebian-source-perl/changelog usr/share/man/man3/Debian::Control.3pm usr/share/man/man3/Debian::Control::Stanza.3pm usr/share/man/man3/Debian::Control::Stanza::Binary.3pm usr/share/man/man3/Debian::Control::Stanza::CommaSeparated.3pm usr/share/man/man3/Debian::Control::Stanza::Source.3pm usr/share/man/man3/Debian::Dependencies.3pm usr/share/man/man3/Debian::Dependency.3pm usr/share/man/man3/Debian::DpkgLists.3pm usr/share/man/man3/Debian::Rules.3pm usr/share/man/man3/Debian::WNPP::Bug.3pm usr/share/man/man3/Debian::WNPP::Query.3pm
+	cd '/dev/shm/dh-make-perl/dh-make-perl'
+	cd '/dev/shm/dh-make-perl/dh-make-perl'
+	rm -f debian/dh-make-perl/usr/share/man/man1/cpan2deb.1p debian/dh-make-perl/usr/share/man/man1/cpan2deb.1p.gz
+	ln -s dh-make-perl.1p.gz debian/dh-make-perl/usr/share/man/man1/cpan2deb.1p.gz
+	rm -f debian/dh-make-perl/usr/share/man/man1/cpan2dsc.1p debian/dh-make-perl/usr/share/man/man1/cpan2dsc.1p.gz
+	ln -s dh-make-perl.1p.gz debian/dh-make-perl/usr/share/man/man1/cpan2dsc.1p.gz
+   dh_fixperms
+	find debian/dh-make-perl ! -type l -a -true -a -true -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw,a-s
+	find debian/libdebian-source-perl ! -type l -a -true -a -true -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw,a-s
+	find debian/dh-make-perl/usr/share/doc -type f -a -true -a ! -regex 'debian/dh-make-perl/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/libdebian-source-perl/usr/share/doc -type f -a -true -a ! -regex 'debian/libdebian-source-perl/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/dh-make-perl/usr/share/doc -type d -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0755
+	find debian/libdebian-source-perl/usr/share/doc -type d -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0755
+	find debian/dh-make-perl/usr/share/man debian/dh-make-perl/usr/share/lintian/overrides -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/libdebian-source-perl/usr/share/man debian/libdebian-source-perl/usr/share/lintian/overrides -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/dh-make-perl/usr/share/perl5 -type f -perm -5 -name '*.pm' -a -true -a -true -print0 2>/dev/null | xargs -0r chmod a-X
+	find debian/libdebian-source-perl/usr/share/perl5 -type f -perm -5 -name '*.pm' -a -true -a -true -print0 2>/dev/null | xargs -0r chmod a-X
+	find debian/dh-make-perl -type f \( -name '*.so.*' -o -name '*.so' -o -name '*.la' -o -name '*.a' -o -name '*.js' -o -name '*.css' -o -name '*.scss' -o -name '*.sass' -o -name '*.jpeg' -o -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.cmxs' \) -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/libdebian-source-perl -type f \( -name '*.so.*' -o -name '*.so' -o -name '*.la' -o -name '*.a' -o -name '*.js' -o -name '*.css' -o -name '*.scss' -o -name '*.sass' -o -name '*.jpeg' -o -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.cmxs' \) -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/dh-make-perl/usr/bin -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod a+x
+   dh_missing
+   dh_installdeb
+	install -d debian/dh-make-perl/DEBIAN
+	install -d debian/libdebian-source-perl/DEBIAN
+   dh_gencontrol
+	echo misc:Depends= >> debian/dh-make-perl.substvars
+	echo misc:Pre-Depends= >> debian/dh-make-perl.substvars
+	dpkg-gencontrol -pdh-make-perl -ldebian/changelog -Tdebian/dh-make-perl.substvars -Pdebian/dh-make-perl -UMulti-Arch
+	echo misc:Depends= >> debian/libdebian-source-perl.substvars
+	echo misc:Pre-Depends= >> debian/libdebian-source-perl.substvars
+	dpkg-gencontrol -plibdebian-source-perl -ldebian/changelog -Tdebian/libdebian-source-perl.substvars -Pdebian/libdebian-source-perl -UMulti-Arch
+	chmod 0644 -- debian/libdebian-source-perl/DEBIAN/control
+	chmod 0644 -- debian/dh-make-perl/DEBIAN/control
+   dh_md5sums
+	cd debian/dh-make-perl >/dev/null && xargs -r0 md5sum | perl -pe 'if (s@^\\@@) { s/\\\\/\\/g; }' > DEBIAN/md5sums
+	cd debian/libdebian-source-perl >/dev/null && xargs -r0 md5sum | perl -pe 'if (s@^\\@@) { s/\\\\/\\/g; }' > DEBIAN/md5sums
+	chmod 0644 -- debian/libdebian-source-perl/DEBIAN/md5sums
+	chmod 0644 -- debian/dh-make-perl/DEBIAN/md5sums
+   dh_builddeb
+	dpkg-deb --root-owner-group --build debian/dh-make-perl ..
+	dpkg-deb --root-owner-group --build debian/libdebian-source-perl ..
+dpkg-deb: building package 'dh-make-perl' in '../dh-make-perl_0.104_all.deb'.
+dpkg-deb: building package 'libdebian-source-perl' in '../libdebian-source-perl_0.104_all.deb'.
+ dpkg-genbuildinfo --build=binary
+ dpkg-genchanges --build=binary >../dh-make-perl_0.104_amd64.changes
+dpkg-genchanges: info: binary-only upload (no source code included)
+ dpkg-source --after-build .
+dpkg-buildpackage: info: binary-only upload (no source included)
+Now running lintian dh-make-perl_0.104_amd64.changes ...
+/usr/bin/ar: /lib/x86_64-linux-gnu/libz.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libbfd-2.31.1-system.so)
+/usr/bin/ar: /lib/x86_64-linux-gnu/libz.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libbfd-2.31.1-system.so)
+W: libdebian-source-perl: uses-dpkg-database-directly usr/share/perl5/Debian/DpkgLists.pm
+/usr/bin/ar: /lib/x86_64-linux-gnu/libz.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libbfd-2.31.1-system.so)
+/usr/bin/ar: /lib/x86_64-linux-gnu/libz.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libbfd-2.31.1-system.so)
+N: 1 tag overridden (1 warning)
+Finished running lintian.

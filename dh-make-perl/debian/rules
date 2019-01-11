@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+BUILDHOME = $(CURDIR)/debian/build
+
+%:
+	dh $@
+
+override_dh_auto_test:
+# leave this here for Test::DistManifest..I want it to happen on package build but not on CPAN install.
+	mkdir -p $(BUILDHOME)
+	HOME=$(BUILDHOME) NO_NETWORK=1 dh_auto_test
+
+override_dh_clean:
+	dh_clean -Xt/dists/Strange-2.1/DEADJOE
+	rm -rf $(BUILDHOME)
+
+	# clean after test packages
+	for i in Strange-0.1 Strange-2.1; do\
+		if test -d "t/dists/$$i/debian"; then \
+		    ( \
+			cd t/dists/$$i && \
+			debian/rules clean && \
+			cd .. && \
+			rm -rf $$i/debian; \
+		    ) \
+		fi \
+	done

@@ -1,0 +1,3 @@
+dh-make-perl_0.104_all.deb perl optional
+dh-make-perl_0.104_amd64.buildinfo perl optional
+libdebian-source-perl_0.104_all.deb perl optional

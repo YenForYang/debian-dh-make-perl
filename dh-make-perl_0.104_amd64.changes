@@ -1,0 +1,52 @@
+Format: 1.8
+Date: Fri, 14 Sep 2018 21:39:58 +0000
+Source: dh-make-perl
+Binary: dh-make-perl libdebian-source-perl
+Built-For-Profiles: nobiarch nocheck nodoc
+Architecture: all
+Version: 0.104
+Distribution: UNRELEASED
+Urgency: medium
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Changed-By: Damyan Ivanov <dmn@debian.org>
+Description:
+ dh-make-perl - helper for creating Debian packages from perl modules
+ libdebian-source-perl - collection of Perl modules for handling Debian source packages
+Closes: 908164
+Changes:
+ dh-make-perl (0.104) UNRELEASED; urgency=medium
+ .
+   [ gregor herrmann ]
+   * DhMakePerl::Command::Packaging: install CODE_OF_CONDUCT files in
+     extract_docs().
+   * Replace sugesstion to run 'dselect update' with 'apt update' in
+     Debian::Control::FromCPAN.
+     Thanks to Axel Beckert for finding and reporting this gem.
+     (Closes: #908164)
+ .
+   [ Damyan Ivanov ]
+   * make: add --revision option for setting the debian revision of the package
+     version (RT#127109)
+ .
+   [ gregor herrmann ]
+   * DhMakePerl::Command::Packaging: use HTTPS URL for Apache-2.0 license.
+   * Update Standards-Version to 4.3.0 for dh-make-perl itself, for created
+     packages, and in the test suite.
+   * Add lintian-override for false positive uses-dpkg-database-directly.
+   * Bump debhelper compatibility level in created packages to 11.
+   * Bump debhelper comaptibility level to 11.
+   * DhMakePerl::Command::Packaging: update discover_utility_deps().
+     Adjust documentation to reality, add support for "--with perl_openssl",
+     some code reformatting.
+Checksums-Sha1:
+ 0a68a3b3bd22c5532aa13f4b38893eacb1bd5c66 121392 dh-make-perl_0.104_all.deb
+ 324db662e71ee0af7f6d372bcccfa9140d278cb6 8924 dh-make-perl_0.104_amd64.buildinfo
+ f003acbd3bed528ce6b74496d344df443a07fce2 85224 libdebian-source-perl_0.104_all.deb
+Checksums-Sha256:
+ b7fdda08934aa1b0835b643257c98d9bd5007decd5cefae6bb4321b22be2e1d9 121392 dh-make-perl_0.104_all.deb
+ 1c310b19e1e8577e33d28844f2fd9dd7b89d95e8be69c6f2fce4c40f9e2bde4a 8924 dh-make-perl_0.104_amd64.buildinfo
+ b809710e4a5a11c5c258fe80f97ed6beb1eed5ba6e3b307140ced48c9e6c1cb0 85224 libdebian-source-perl_0.104_all.deb
+Files:
+ 2405ab7b0cc21a5f37eea4cc4fa5d2e3 121392 perl optional dh-make-perl_0.104_all.deb
+ d6b07eb923d203e748fa4fe6a52b283a 8924 perl optional dh-make-perl_0.104_amd64.buildinfo
+ fb50af8de3657668b26a7462745a5417 85224 perl optional libdebian-source-perl_0.104_all.deb
